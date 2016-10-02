@@ -1,17 +1,16 @@
 <?php
-
 /**
  *  Slim Application Start-up Here!!
  *
  */
-
 session_start();
-require_once __DIR__ . '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$slim = new \Slim\App([
-  'settings' => [
-    'displayErrorDetails' => true,
-  ]
-]);
+//Initialise Slim Framework by Overwritted App Class!!
+$app = new App\App;
 
-require_once __DIR__ . '/routes.php';
+//Instantiate Eloquent Capsule!! Database Connection set up
+require_once __DIR__ . '/db.php';
+
+//Invoke routes with Controller!!
+require __DIR__ . '/../app/routes.php';

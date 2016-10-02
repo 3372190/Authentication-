@@ -1,0 +1,19 @@
+{% set _title = block('title') %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Authenticate {% if _title is not empty %} | {{ _title }} {% endif %}</title>
+    {% include 'template/partials/header.twig' %}
+  </head>
+
+  <body>
+      <div class="container">
+          {% include 'template/partials/navigation.twig' %}
+          {% block content %}{% endblock %}
+      </div>
+  </body>
+
+  <footer> {% include 'template/partials/footer.twig' %} </footer>
+</html>
