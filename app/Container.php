@@ -1,15 +1,19 @@
 <?php
 
+use Slim\Router;
 use Slim\Views\Twig as View;
 use Slim\Views\TwigExtension;
 use Interop\Container\ContainerInterface;
+
 use App\Controllers\HomeController;
+use App\Controllers\Auth\AuthController;
+
+
+
 use App\Models\User;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+
 
 return [
-
   /**
    * Instantiating Twig & TwigExtension Objects!!
    *   with Slim Container callbacks function!!
@@ -36,7 +40,15 @@ return [
 
   HomeController::class =>  function (ContainerInterface $c) {
     return new HomeController(
-        $c->get(View::class) 
+        $c->get(View::class),
+        $c->get(Router::class)
+    );
+  },
+
+  AuthController::class => function (ContainerInterface $c){
+    return new AuthController(
+        $c->get(View::class),
+        $c->get(Router::class)
     );
   },
 

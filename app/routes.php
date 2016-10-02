@@ -5,4 +5,7 @@
  */
 
 //Setting Router for HomeController with Index() Method!!!
-$app->get('/', ['\App\Controllers\HomeController', 'index']);
+$app->get('/', ['\App\Controllers\HomeController', 'index'])->setName('home');
+
+$app->get('/auth/signup', ['\App\Controllers\Auth\AuthController' , 'getSingUp'])->setName('auth.signup');
+$app->post('/auth/signup' , ['\App\Controllers\Auth\AuthController' , 'postSignUp']);

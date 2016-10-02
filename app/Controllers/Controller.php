@@ -2,21 +2,17 @@
 
 namespace App\Controllers;
 
+use Slim\Router;
 use Slim\Views\Twig as View;
 
 class Controller
 {
-    // protected $request;
-    // protected $response;
-    protected $view;
+  protected $view;
+  protected $router;
 
-
-    public function __construct(View $view)
-    {
-        // $this->request  = $request;
-        // $this->response = $response;
-        $this->view     = $view;
-    }
-
-
+  public function __construct(View $view, Router $router)
+  {
+    $this->view   = $view;
+    $this->router = $router;
+  }
 }

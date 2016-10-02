@@ -9,8 +9,8 @@
   </head>
 
   <body>
+      {% include 'template/partials/navigation.twig' %}
       <div class="container">
-          {% include 'template/partials/navigation.twig' %}
           {% block content %}{% endblock %}
       </div>
   </body>
