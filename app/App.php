@@ -6,6 +6,7 @@
 namespace App;
 
 use DI\ContainerBuilder;
+use Slim\Csrf\Guard;
 
 class App extends \DI\Bridge\Slim\App
 {
@@ -14,6 +15,7 @@ class App extends \DI\Bridge\Slim\App
     $builder->addDefinitions([
       'settings.displayErrorDetails' => true,
     ]);
+
 
     $builder->addDefinitions(__DIR__ . '/Container.php');
   }

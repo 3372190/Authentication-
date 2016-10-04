@@ -1,59 +1,56 @@
 <?php
 
-use Slim\Router;
+use function DI\get;
 use Slim\Views\Twig as View;
 use Slim\Views\TwigExtension;
-use Interop\Container\ContainerInterface;
-
-use App\Controllers\HomeController;
-use App\Controllers\Auth\AuthController;
-
-
-
+use App\Validation\Contracts\ValidatorInterface;
+use App\Validation\Validator;
 use App\Models\User;
-
+use Interop\Container\ContainerInterface;
+use Slim\Csrf\Guard;
+use App\Authenticate\Auth;
+use Slim\Flash\Messages as Flash;
 
 return [
+
+  Auth::class => function (ContainerInterface $c){
+    return new Auth;
+  },
+
+  Flash::class => function (ContainerInterface $c){
+    return new Flash;
+  },
+  //'router' => get(Slim\Router::class),
+
+  ValidatorInterface::class => function (ContainerInterface $c) {
+      return new Validator;
+  },
   /**
    * Instantiating Twig & TwigExtension Objects!!
    *   with Slim Container callbacks function!!
    */
   View::class => function (ContainerInterface $c){
     $view = new View(__DIR__ .'/../resources/views', [
-        //Only set 'debug' to true in developing STAGE!!
-        // To use dump() functionality in Twig Page!!!
-        'debug' => true,
         'cache' => false,
     ]);
-
 
     $view->addExtension(new TwigExtension(
       $c->get('router'),
       $c->get('request')->getUri()
     ));
 
-    //Instantiate Twig_Environment_Debug to use dump() Function!
-    $view->addExtension(new Twig_Extension_Debug());
+    $view->getEnvironment()->addGlobal('auth', $c->get(Auth::class));
+    $view->getEnvironment()->addGlobal('flash', $c->get(Flash::class));
 
     return $view;
   },
 
-  HomeController::class =>  function (ContainerInterface $c) {
-    return new HomeController(
-        $c->get(View::class),
-        $c->get(Router::class)
-    );
-  },
-
-  AuthController::class => function (ContainerInterface $c){
-    return new AuthController(
-        $c->get(View::class),
-        $c->get(Router::class)
-    );
-  },
-
   User::class =>function (ContainerInterface $c){
       return new User;
+  },
+
+  Guard::class => function (ContainerInterface $c) {
+    return new Guard;
   },
 
 ];
