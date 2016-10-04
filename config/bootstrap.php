@@ -24,11 +24,11 @@ require_once __DIR__ . '/db.php';
 
 $app->add(new ValidationErrorsMiddleware($container->get(View::class)));
 $app->add(new OldInputMiddleware($container->get(View::class)));
-$app->add(new CsrfViewMiddleware($container->get(View::class), $container->get(Guard::class)));
-$app->add($container->get(Guard::class));
+// $app->add(new CsrfViewMiddleware($container->get(View::class), $container->get(Guard::class)));
+// $app->add($container->get(Guard::class));
 
 
 v::with('App\\Validation\\Rules\\');
 
 //Invoke routes with Controller!!
-require __DIR__ . '/../app/routes.php';
+require __DIR__ . '/routes.php';

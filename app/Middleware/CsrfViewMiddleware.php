@@ -10,7 +10,6 @@ class CsrfViewMiddleware
 {
 
   protected $view;
-  protected $csrf;
 
   public function __construct(View $view, Guard $csrf)
   {
@@ -20,16 +19,13 @@ class CsrfViewMiddleware
 
   public function __invoke($request, $response, $next)
   {
-      $nameKey  = $this->csrf->getTokenNameKey();
-      $valueKey = $this->csrf->getTokenValueKey();
 
-
-    $this->view->getEnvironment()->addGlobal('csrf', [
+      $this->view->getEnvironment()->addGlobal('csrf', [
         'field' => '
-        <input type ="hidden" name =" '.$nameKey.' " value =" '.$request->getAttribute($nameKey).' ">
-        <input type ="hidden" name =" '.$valueKey.' " value =" '.$request->getAttribute($valueKey).' ">
+        <input type ="hidden" name =" '.$this->csrf->getTokenNameKey() .' " value =" '.$this->csrf->getTokenName().' ">
+        <input type ="hidden" name =" '.$this->csrf->getTokenValueKey().' " value =" '.$this->csrf->getTokenValue().' ">
         ',
-    ]);
+      ]);
 
     $response = $next($request, $response);
     return $response;

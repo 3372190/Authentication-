@@ -13,4 +13,11 @@ class User extends Model
      'username',
      'password',
   ];
+
+  public function updatePassword($password)
+  {
+    $this->update([
+        'password' => password_hash($password, PASSWORD_DEFAULT),
+    ]);
+  }
 }

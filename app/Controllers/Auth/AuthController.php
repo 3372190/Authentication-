@@ -45,6 +45,7 @@ class AuthController
 
   public function postSingIn(Flash $flash, Auth $auth, Response $response, Request $request)
   {
+    
       $auth = $auth->attempt(
           $request->getParam('email'),
           $request->getParam('password')
