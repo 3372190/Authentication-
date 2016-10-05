@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Authentication </title>
+    {% include 'template/partials/header.twig' %}
+  </head>
+  <body>
+
+    <div class="container">
+      {% include 'template/includes/top_navigation.twig' %}
+      {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+      {% include 'template/partials/footer.twig' %}
+    </footer>
+  </body>
+</html>
