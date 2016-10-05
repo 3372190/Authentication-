@@ -6,8 +6,8 @@ namespace App\Controllers;
  * Home Controller !!! to render index.twig !!!
  */
 use Slim\Views\Twig;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class HomeController
 {
