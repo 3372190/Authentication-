@@ -1,23 +1,22 @@
 <?php
 
+/**
+ *  Overwrite the php-di\Slim-bridge App class!!
+ */
 namespace App;
 
-/**
- * Override DI\Bridge\Slim\App
- * - Override to - configure self build container Method!!
- */
-
 use DI\ContainerBuilder;
-use DI\Bridge\Slim\App as Di_Bridge;
+use Slim\Csrf\Guard;
 
-class App extends Di_Bridge
+class App extends \DI\Bridge\Slim\App
 {
-   protected function configureContainer(ContainerBuilder $builder)
-   {
-      $builder->addDefinitions([
-        'settings.displayErrorDetails' => true,
-      ]);
+  protected function configureContainer(ContainerBuilder $builder)
+  {
+    $builder->addDefinitions([
+      'settings.displayErrorDetails' => true,
+    ]);
 
-      $builder->addDefinitions(__DIR__ . '/container.php');
-   }
+
+    $builder->addDefinitions(__DIR__ . '/Container.php');
+  }
 }
