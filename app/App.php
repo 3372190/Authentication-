@@ -1,12 +1,8 @@
 <?php
 
-/**
- *  Overwrite the php-di\Slim-bridge App class!!
- */
 namespace App;
 
 use DI\ContainerBuilder;
-use Slim\Csrf\Guard;
 
 class App extends \DI\Bridge\Slim\App
 {
@@ -17,6 +13,6 @@ class App extends \DI\Bridge\Slim\App
     ]);
 
 
-    $builder->addDefinitions(__DIR__ . '/Container.php');
+    $builder->addDefinitions(__DIR__ . '/container.php');
   }
 }

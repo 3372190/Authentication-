@@ -1,8 +1,5 @@
 <?php
-/**
- * Initialise Eloquent Capsule and Connecting to Database!!
- * Database is now Set Globally!!
- */
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 $capsule = new Capsule;
